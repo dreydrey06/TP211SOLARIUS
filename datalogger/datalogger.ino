@@ -24,7 +24,8 @@ String dataLabel6 = "Angle of inclination ";
 bool label = true;
 
 
-void setup() {
+void setup() 
+{
   servo.rotate.attach(11);
   servo.incline.attach(10);
   pinMode(A0,INPUT_PULLUP); // capteur de tension 
@@ -35,7 +36,8 @@ void setup() {
   Serial.begin(9600);
 }
 
-void loop() {
+void loop() 
+{
   while(label)
   { //This will print the name of my colums for my future CSV file
         Serial.print(dataLabel1);
@@ -51,8 +53,10 @@ void loop() {
   sensorValue = analogRead(A0);
   voltage = sensorValue * (5.0 / 1023.0);
   Serial.println(voltage);
-
-
+  Serial.println(capt1val);
+  Serial.println(capt2val);
+  Serial.println(capt3val);
+  Serial.println(capt4val);
   
   delay(frequence);
 }
