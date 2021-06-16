@@ -18,7 +18,7 @@ int right_average;
 
 int difference_topdown;
 int difference_sides;
-const int margin = 40;
+const int margin = 30 ;
 
 
 void setup() 
@@ -37,7 +37,7 @@ void loop() {
   pos_incline = servo_incline.read();
   pos_rotate = servo_rotate.read();
 
-  Serial.println(pos_incline);
+  Serial.println(pos_rotate);
 
   
 
@@ -51,9 +51,9 @@ void loop() {
   
   if ((top_average > bottom_average) && (difference_topdown > margin))
     {
-     if (pos_incline < 180) //if different from max val
+     if (pos_incline > 0) //if different from max val
        {
-       pos_incline = pos_incline + 1;
+       pos_incline = pos_incline - 1;
        servo_incline.write(pos_incline);
        delay(5);
        }
@@ -61,33 +61,32 @@ void loop() {
     
   if((bottom_average > top_average) && (difference_topdown > margin))
     {
-    if (pos_incline > 0) //if different from min val
+    if (pos_incline < 180) //if different from min val
       {
-       pos_incline = pos_incline - 1;
+       pos_incline = pos_incline + 1;
        servo_incline.write(pos_incline);
        delay(5);
       }
     }
     
-  if ((right_average > left_average) && (difference_sides > margin))
+  if ((right_average < left_average) && (difference_sides > margin))
     {
-     if (pos_rotate < 180) //if different from max val
+     if (pos_rotate > 0) //if different from min val
        {
-       pos_rotate = pos_rotate + 1;
+       pos_rotate = pos_rotate - 1;
        servo_rotate.write(pos_rotate);
        delay(5);
        }
     }
     
-  if((left_average > right_average) && (difference_sides > margin))
+  if((left_average < right_average) && (difference_sides > margin))
     {
-    if (pos_rotate > 0) //if different from min val
+    if (pos_rotate < 180) //if different from max val
       {
-       pos_incline =pos_incline - 1;
+       pos_rotate =pos_rotate + 1;
        servo_rotate.write(pos_rotate);
        delay(5);
       }
     }
-
-  delay(25);
+    delay(10);
 }
