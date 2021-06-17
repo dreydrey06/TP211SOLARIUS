@@ -1,20 +1,16 @@
 
 #include "SD.h"
 #include"SPI.h"
-//
-//the hardware CS pin (10 on most Arduino boards,
-// 53 on the Mega) must be left as an output or the SD
-// library functions will not work.
+
 const int CSpin = 10;
 String dataString =""; // holds the data to be written to the SD card
 float power = 0.00; // value read from your first sensor
 float voltage = 0.00; // value read from your second sensor
 File sensorData;
 int number_of_mesure = 0;
-
 float resistance = 12.5;
-//
-//
+
+
 void setup()
 {
 // Open serial communications
@@ -38,10 +34,11 @@ void loop(){
   voltage = (voltage * 5 )/ 1023;
   power =(voltage * voltage)/ resistance ;
   Serial.println(power);
+  Serial.println(voltage);
 // build the data string
 dataString = String(number_of_mesure)+ "," + String(power) + "," + String(voltage); // convert to CSV
 saveData(); // save to SD card
-delay(1000); // delay before next write to SD Card, adjust as required
+delay(60000); // delay before next write to SD Card, adjust as required
 }
 //
 void saveData(){
