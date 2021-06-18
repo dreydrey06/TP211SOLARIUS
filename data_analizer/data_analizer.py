@@ -19,12 +19,13 @@ def open_and_count(filecsv=str):
     voltage = []
     with open(filecsv, "r") as f:
         data = csv.reader(f, delimiter=',')
-        for row in data:
+        for row in range(0, data, 100):
             num.append(row[0])
             power.append(row[1])
             voltage.append(row[2])
 
     return(num, power, voltage)
+
 
 def chart_it(filtered_data : tuple):
     """This function takes a tuple for variable and creates a chart
